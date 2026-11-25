@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: toggled by adding `.dark` to <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Premium Modern Design Tokens
+   --------------------------------------------------------------------------- */
+:root {
+  --bg: #f8fafc; /* crisp slate-50 background */
+  --surface: #ffffff; /* pure white surface */
+  --ink: #0f172a; /* deep charcoal slate-900 */
+  --ink-soft: #475569; /* refined slate-600 */
+
+  --accent-yellow: #f59e0b; /* rich warm amber-500 gold */
+  --accent-orange: #f97316; /* vibrant modern orange-500 */
+  --accent-cobalt: #4f46e5; /* electric indigo-600 */
+
+  --border-color: rgba(15, 23, 42, 0.1);
+  --radius: 16px; /* sleek modern rounded corners */
+}
+
+.dark {
+  --bg: #090d16; /* luxurious deep obsidian blue-black */
+  --surface: #131b2e; /* rich deep indigo-slate surface */
+  --ink: #f8fafc; /* crisp titanium white */
+  --ink-soft: #94a3b8; /* silver slate */
+
+  --accent-yellow: #fbbf24; /* glowing amber gold */
+  --accent-orange: #ff7849; /* neon sunset coral */
+  --accent-cobalt: #6366f1; /* electric violet indigo */
+
+  --border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Expose tokens + fonts to Tailwind's utility layer */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-yellow: var(--accent-yellow);
+  --color-orange: var(--accent-orange);
+  --color-cobalt: var(--accent-cobalt);
+
+  --font-display: var(--font-outfit), system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+* {
+  border-color: var(--border-color);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.08) 0%, transparent 70%), var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark body {
+  background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.15) 0%, transparent 70%), var(--bg);
+}
+
+::selection {
+  background: var(--accent-yellow);
+  color: #000000;
+}
+
+/* ---------------------------------------------------------------------------
+   Premium Material — Sleek Glassmorphism, Subtle Elevation & Micro-animations
+   --------------------------------------------------------------------------- */
+.brutal {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.brutal-lg {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.05);
+}
+
+.brutal-sm {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.brutal-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .brutal-card {
+  box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.brutal-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15), 0 0 20px rgba(99, 102, 241, 0.15);
+  border-color: var(--accent-cobalt);
+}
+
+/* Buttons */
+.brutal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 0.65rem 1.6rem;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.brutal-btn.bg-yellow,
+.brutal-btn[class*="bg-yellow"] {
+  background: linear-gradient(135deg, var(--accent-yellow), #f59e0b);
+  color: #000000 !important;
+  font-weight: 800;
+  box-shadow: 0 4px 15px 0 rgba(245, 158, 11, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brutal-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+}
+
+.brutal-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brutal-btn-secondary {
+  background: var(--surface);
+  color: var(--ink) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.brutal-btn-secondary:hover {
+  border-color: var(--accent-cobalt);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Hairline borders replacing chunky 3px rules */
+@utility border-3 {
+  border-width: 1px;
+  border-color: var(--border-color);
+}
+@utility border-t-3 {
+  border-top-width: 1px;
+  border-color: var(--border-color);
+}
+@utility border-b-3 {
+  border-bottom-width: 1px;
+  border-color: var(--border-color);
+}
+@utility border-l-3 {
+  border-left-width: 1px;
+  border-color: var(--border-color);
+}
+@utility border-r-3 {
+  border-right-width: 1px;
+  border-color: var(--border-color);
+}
+
+/* Section divider — elegant hairline gradient */
+.brutal-bar {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  border: none;
+}
+
+.footer-link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  transition: color 0.15s ease;
+}
+.footer-link:hover {
+  color: var(--accent-cobalt);
+}
+
+/* Marquee for the hiring-partners strip */
+@keyframes brutal-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: brutal-marquee 40s linear infinite;
+}
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbars on the swipeable carousels while keeping scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
